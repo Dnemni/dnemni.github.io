@@ -1,0 +1,38 @@
+/*
+ * Reset CSS
+ * Removes default broswer styles 
+ * and sets a consistent baseline for styling
+ */
+
+* {
+    /* 
+     * Border box sizing means that the width 
+     * and height of the box includes the padding and borders 
+     */
+    box-sizing: border-box;
+}
+
+html,
+body {
+    /* Remove default margin and padding */
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    /* Set a default size for body */
+    min-height: 100vh;
+}
+
+h1,
+h2,
+p {
+    /* Remove default margin */
+    margin: 0;
+}
+
+a {
+    /* Make links inherit color of their parent and text decoration */
+    color: inherit;
+    text-decoration: none;
+}

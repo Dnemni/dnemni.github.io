@@ -1,0 +1,24 @@
+/*
+ * Tokens CSS
+ * Custom CSS properties for colors, spacing, and borders
+ */
+
+:root {
+    /* 
+     * Syntax --property-name: value; defines the property 
+     * var(--property-name) is used to reference the property
+     */
+    --color-background: #151515;
+    --color-surface: #232323;
+    --color-surface-alt: #303030;
+    --color-border: #555555;
+    --color-text: #f4f4f4;
+    --color-text-muted: #b8b8b8;
+
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 1.5rem;
+    --space-lg: 2rem;
+
+    --border-width: 2px;
+}

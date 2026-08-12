@@ -1,0 +1,117 @@
+/*
+ * Main CSS
+ * The page itself with
+ * styles for the main layout and components
+ */
+
+body {
+    /* Uses the custom properties defined in tokens.css */
+    background: var(--color-background);
+    color: var(--color-text);
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+}
+
+.site-header {
+    /* Sets header styles */
+    height: 56px;
+
+    display: flex; /* Flexbox horizontal layout since header only has one dimension */
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 var(--space-md);
+
+    background: var(--color-surface);
+    border-bottom:
+        var(--border-width)
+        solid
+        var(--color-border);
+}
+
+.portfolio {
+    /* Sets the portfolio styles */
+    min-height: calc(100vh - 56px);
+
+    display: grid; /* Grid layout for the identity panel, world panel, and explore panel */
+
+    grid-template-columns: /* Sets the column widths into three sections of 25%, 50%, and 25% */
+        minmax(240px, 1fr)
+        minmax(400px, 2fr) /* minmax means column may shrink but no less than 400px */
+        minmax(260px, 1fr);
+}
+
+/* Following 4 sections exposes layout boundaries */
+.identity-panel,
+.world-panel,
+.explore-panel {
+    /* Makes the panels visible with large padding */
+    padding: var(--space-lg);
+}
+
+.identity-panel {
+    /* Sets the identity panel styles */
+    background: var(--color-surface);
+    border-right:
+        var(--border-width)
+        solid
+        var(--color-border);
+}
+
+.world-panel {
+    /* Sets the world panel styles */
+    background: var(--color-background);
+}
+
+.explore-panel {
+    /* Sets the explore panel styles */
+    background: var(--color-surface);
+    border-left:
+        var(--border-width)
+        solid
+        var(--color-border);
+}
+
+.workshop-core {
+    /* Creates the fake centerpiece circle named CORE */
+    width: 180px;
+    aspect-ratio: 1;
+
+    display: grid; /* Centered grid helps center the word */
+    place-items: center; /* both horizontally and vertically inside the element */
+
+    margin: var(--space-lg) auto;
+
+    border:
+        var(--border-width)
+        solid
+        var(--color-border);
+
+    border-radius: 50%;
+
+    background: var(--color-surface-alt);
+}
+
+.explore-panel {
+    /* Sets the explore panel styles for right side navigation */
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.explore-panel a {
+    /* Sets the styles for the boxed links in the explore panel */
+    display: block;
+
+    padding: var(--space-md);
+
+    background: var(--color-surface-alt);
+
+    border:
+        var(--border-width)
+        solid
+        var(--color-border);
+}
