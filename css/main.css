@@ -4,20 +4,38 @@
  * styles for the main layout and components
  */
 
+
+/*
+ * Notes to Remember
+ * Css Units: px (fixed CSS pixel unit), em (based on current/inherited font size), rem (based on root font size), vh (viewport height), fr (fraction of available grid space)
+ */
+
 body {
     /* Uses the custom properties defined in tokens.css */
     background: var(--color-background);
     color: var(--color-text);
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+    font-family: var(--font-body);
+}
+
+h1,
+h2 {
+    /* Sets the font family and weight for identity/section titles */
+    font-family: var(--font-display);
+    font-weight: 600;
+}
+
+.site-status,
+.panel-kicker,
+.status-label,
+.explore-number {
+    /* Sets font family for machine metadata/interface labels */
+    font-family: var(--font-mono);
 }
 
 .site-header {
     /* Sets header styles */
-    height: 56px;
+    min-height: 56px; /* Allows for vertical expansion if text wraps */
 
     display: flex; /* Flexbox horizontal layout since header only has one dimension and default direction is on main axis (row) */
     align-items: center; /* Acts along the cross axis */
@@ -30,6 +48,22 @@ body {
         var(--border-width)
         solid
         var(--color-border);
+}
+
+.site-brand {
+    /* Sets the site brand styles */
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.site-status {
+    /* Sets the site status styles */
+    color: var(--color-text-muted);
+
+    font-size: 0.75rem;
+    letter-spacing: 0.08em; /* Adds tracking to the text btwn characters */
+    text-transform: uppercase; /* Transforms the text to uppercase */
 }
 
 .portfolio {
@@ -49,7 +83,8 @@ body {
  */
 
 .identity-panel {
-    /* Makes the panels visible with large padding */
+    /* Makes the panels visible with large padding and establishes positional context */
+    position: relative;
     padding: var(--space-lg);
 
     /* Sets the identity panel styles */
@@ -57,19 +92,55 @@ body {
     border-right:
         var(--border-width)
         solid
-        var(--color-border);
+        var(--color-border-strong);
 }
 
 .world-panel {
-    /* Makes the panels visible with large padding */
+    /* Makes the panels visible with large padding and establishes positional context */
+    position: relative;
     padding: var(--space-lg);
 
     /* Sets the world panel styles */
-    background: var(--color-background);
+    background-color: var(--color-background);
+    display: flex; /* Use flexbox for the world panel */
+    flex-direction: column;
+
+    /* Adds a faint grid pattern to the background */
+    background-image:
+        linear-gradient(
+            rgba(255, 255, 255, 0.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.025) 1px,
+            transparent 1px
+        );
+
+    background-size: 32px 32px;
+}
+
+.world-canvas {
+    /* Sets the styles for the world canvas */
+    flex: 1;
+
+    min-height: 420px;
+
+    display: grid; /* Use grid to center objects within the canvas */
+    place-items: center;
+
+    border:
+        1px
+        solid
+        var(--color-border);
 }
 
 .explore-panel {
-    /* Makes the panels visible with large padding */
+    /* Makes the panels visible with large padding and establishes positional context */
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    position: relative;
     padding: var(--space-lg);
 
     /* Sets the explore panel styles */
@@ -77,39 +148,14 @@ body {
     border-left:
         var(--border-width)
         solid
-        var(--color-border);
+        var(--color-border-strong);
 }
 
-.workshop-core {
-    /* Creates the fake centerpiece circle named CORE */
-    width: 180px;
-    aspect-ratio: 1;
-
-    display: grid; /* Centered grid helps center the word */
-    place-items: center; /* both horizontally and vertically inside the element */
-
-    margin: var(--space-lg) auto;
-
-    border:
-        var(--border-width)
-        solid
-        var(--color-border);
-
-    border-radius: 50%;
-
-    background: var(--color-surface-alt);
-}
-
-.explore-panel {
-    /* Sets the explore panel styles for right side navigation */
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
-}
-
-.explore-panel a {
+.explore-link {
     /* Sets the styles for the boxed links in the explore panel */
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
 
     padding: var(--space-md);
 
@@ -119,4 +165,230 @@ body {
         var(--border-width)
         solid
         var(--color-border);
+
+    /* States that if one of these properties changes, it should subtly transition between old and new values */
+    transition:
+        background-color 120ms ease,
+        border-color 120ms ease,
+        transform 120ms ease;
+}
+
+.explore-link:hover {
+    /* When the link is hovered, change its appearance to these declarations */
+    background: var(--color-surface-raised);
+    border-color: var(--color-accent-muted);
+
+    transform: translateX(-3px);
+}
+
+.explore-link:focus-visible {
+    /* Allows the link to be focused using tab and adds a focus outline */
+    outline:
+        2px
+        solid
+        var(--color-accent);
+
+    outline-offset: 2px;
+}
+
+.explore-number {
+    /* Sets the styles for the number in the explore link */
+    color: var(--color-accent);
+
+    font-size: 0.7rem;
+}
+
+.workshop-core {
+    /* Creates the fake centerpiece circle named CORE */
+    width: min(180px, 80%); /* Use which ever is smaller: 180px or 80% of the container */
+    aspect-ratio: 1;
+
+    display: grid; /* Centered grid helps center the word */
+    place-items: center; /* both horizontally and vertically inside the element */
+
+    margin: var(--space-xl) auto;
+
+    border:
+        1px
+        solid
+        var(--color-accent-muted);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at center,
+            var(--color-surface-raised),
+            var(--color-surface-alt)
+        );
+
+    box-shadow:
+        0 0 0 8px var(--color-surface),
+        0 0 0 9px var(--color-border);
+}
+
+.workshop-core span {
+    /* Sets the styles for the text inside the core circle */
+    font-family: var(--font-mono);
+
+    font-size: 0.8rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+
+    color: var(--color-accent);
+}
+
+.current-status {
+    /* Sets the styles for the current status indicator */
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+
+    padding-top: var(--space-md);
+
+    border-top:
+        var(--border-width)
+        solid
+        var(--color-border);
+}
+
+.status-indicator {
+    /* Sets the styles for the status indicator */
+    width: 8px;
+    height: 8px;
+
+    flex: 0 0 auto;
+
+    border-radius: 50%;
+
+    background: var(--color-status);
+
+    box-shadow:
+        0 0 8px
+        rgba(143, 184, 154, 0.5);
+}
+
+.status-label {
+    /* Sets the styles for the status label */
+    margin-bottom: 0.2rem;
+
+    color: var(--color-text-muted);
+
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* 
+ * Following 3 sections sets a clear hierarchy for the panel headings, kickers, and titles
+ */
+
+.panel-heading {
+    /* Sets the styles for the panel heading */
+    margin-bottom: var(--space-lg);
+}
+
+.panel-kicker {
+    /* Sets the styles for the panel kicker */
+    margin-bottom: var(--space-xs);
+
+    color: var(--color-accent);
+
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.panel-heading h2 {
+    /* Sets the styles for the panel heading title */
+    font-size: 1.6rem;
+}
+
+/* 
+ * Following 2 sections sets a clear hierarchy for the identity heading and role
+ */
+
+.identity-heading h1 {
+    /* Sets the styles for the identity heading */
+    margin-bottom: var(--space-xs);
+
+    font-size: 1.8rem;
+}
+
+.identity-role {
+    /* Sets the styles for the identity role */
+    color: var(--color-text-muted);
+
+    font-size: 0.9rem;
+    line-height: 1.5; /* Controls the vertical size of a line box */
+}
+
+/*
+ * Following 2 sections set up the empty state for the world and titles
+ */
+
+ .world-empty-state {
+    /* Sets the styles for the empty state of the world panel */
+    max-width: 280px;
+
+    padding: var(--space-lg);
+
+    text-align: center;
+
+    color: var(--color-text-muted);
+}
+
+.empty-state-title {
+    /* Sets the styles for the empty state title */
+    margin-bottom: var(--space-xs);
+
+    color: var(--color-text);
+
+    font-family: var(--font-mono);
+
+    font-size: 0.75rem;
+
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+@media (max-width: 960px) { /* 960px to give breathing room before layout stops looking good */
+    /*  If viewport is less than 960px wide, apply these styles */
+    .portfolio {
+        grid-template-columns: 1fr; /* Grid changes into one single column for the entire portfolio */
+    }
+
+    /* When the viewport is less than 960px wide, remove left/right borders and stack the panels vertically */
+    .identity-panel,
+    .world-panel,
+    .explore-panel {
+        border-left: 0;
+        border-right: 0;
+
+        border-bottom:
+            var(--border-width)
+            solid
+            var(--color-border-strong);
+    }
+
+    /* When the viewport is less than 960px wide, adjust the site header */
+    .site-header {
+        gap: var(--space-sm);
+    }
+}
+
+/* Mobile View Overwrite for 600px and below */
+@media (max-width: 600px) {
+    /* When the viewport is less than 600px wide, adjust the site header */
+    .site-header {
+        align-items: flex-start;
+        flex-direction: column; /* Change the main axis to be vertical for mobile views */
+
+        padding-top: var(--space-sm);
+        padding-bottom: var(--space-sm);
+    }
+
+    .portfolio {
+        min-height: auto;
+    }
 }

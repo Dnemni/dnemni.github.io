@@ -13,38 +13,81 @@
 
 <body>
 <header class="site-header">
-    <p>Dhruv's Workshop</p>
-    <p>Another side project begins...</p>
+    <p class="site-brand">Dhruv's Workshop</p>
+    <p class="site-status">System status: early development</p>
 </header>
 
 <main class="portfolio">
 
     <section class="identity-panel">
-        <h1>Dhruv Nemani</h1>
-        <p>Software Engineer · AI · Systems</p>
-
-        <div class="workshop-core">
-            Core
+        <div class="identity-heading">
+            <h1>Dhruv Nemani</h1>
+            <p class="identity-role">Software Engineer · AI · Systems</p>
         </div>
 
-        <p>Currently: Purdue CS + AI</p>
+        <div class="workshop-core">
+            <span>Core</span>
+        </div>
+
+        <div class="current-status">
+            <span class="status-indicator" aria-hidden="true"></span>
+
+            <div>
+                <p class="status-label">Currently:</p>
+                <p>Purdue CS + AI</p>
+            </div>
+        </div>
     </section>
 
     <section class="world-panel">
-        <h2>The Workshop</h2>
+        <div class="panel-heading">
+            <p class="panel-kicker">Environment</p>
+            <h2>The Workshop</h2>
+        </div>
 
-        <p>Things will appear here as you explore.</p>
+        <div class="world-canvas">
+            <div class="world-empty-state">
+                <p class="empty-state-title">Workshop offline</p>
+                <p>Systems will appear here as you explore.</p>
+            </div>
+        </div>
     </section>
 
     <nav class="explore-panel" aria-label="Portfolio sections">
-        <h2>Explore</h2>
+        <div class="panel-heading">
+            <p class="panel-kicker">Navigation</p>
+            <h2>Explore</h2>
+        </div>
 
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#side-quests">Side Quests</a>
-        <a href="#resume">Resume</a>
-        <a href="#contact">Contact</a>
+        <a class="explore-link" href="#about">
+            <span class="explore-number">01</span>
+            <span>About</span>
+        </a>
+
+        <a class="explore-link" href="#experience">
+            <span class="explore-number">02</span>
+            <span>Experience</span>
+        </a>
+
+        <a class="explore-link" href="#projects">
+            <span class="explore-number">03</span>
+            <span>Projects</span>
+        </a>
+
+        <a class="explore-link" href="#side-quests">
+            <span class="explore-number">04</span>
+            <span>Side Quests</span>
+        </a>
+
+        <a class="explore-link" href="#resume">
+            <span class="explore-number">05</span>
+            <span>Resume</span>
+        </a>
+
+        <a class="explore-link" href="#contact">
+            <span class="explore-number">06</span>
+            <span>Contact</span>
+        </a>
     </nav>
 
 </main>
