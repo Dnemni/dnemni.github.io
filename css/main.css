@@ -20,8 +20,8 @@ body {
     height: 56px;
 
     display: flex; /* Flexbox horizontal layout since header only has one dimension and default direction is on main axis (row) */
-    align-items: center;
-    justify-content: space-between;
+    align-items: center; /* Acts along the cross axis */
+    justify-content: space-between; /* Acts along on the main axis */
 
     padding: 0 var(--space-md);
 
