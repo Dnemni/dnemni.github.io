@@ -19,7 +19,7 @@ body {
     /* Sets header styles */
     height: 56px;
 
-    display: flex; /* Flexbox horizontal layout since header only has one dimension */
+    display: flex; /* Flexbox horizontal layout since header only has one dimension and default direction is on main axis (row) */
     align-items: center;
     justify-content: space-between;
 
@@ -38,21 +38,20 @@ body {
 
     display: grid; /* Grid layout for the identity panel, world panel, and explore panel */
 
-    grid-template-columns: /* Sets the column widths into three sections of 25%, 50%, and 25% */
+    grid-template-columns: /* Sets the column widths into three sections of 25%, 50%, and 25% or their minimum widths */
         minmax(240px, 1fr)
-        minmax(400px, 2fr) /* minmax means column may shrink but no less than 400px */
+        minmax(400px, 2fr) /* minmax means column may grow and shrink but no less than 400px with no upper bound */
         minmax(260px, 1fr);
 }
 
-/* Following 4 sections exposes layout boundaries */
-.identity-panel,
-.world-panel,
-.explore-panel {
-    /* Makes the panels visible with large padding */
-    padding: var(--space-lg);
-}
+/* 
+ * Following 3 sections exposes layout boundaries 
+ */
 
 .identity-panel {
+    /* Makes the panels visible with large padding */
+    padding: var(--space-lg);
+
     /* Sets the identity panel styles */
     background: var(--color-surface);
     border-right:
@@ -62,11 +61,17 @@ body {
 }
 
 .world-panel {
+    /* Makes the panels visible with large padding */
+    padding: var(--space-lg);
+
     /* Sets the world panel styles */
     background: var(--color-background);
 }
 
 .explore-panel {
+    /* Makes the panels visible with large padding */
+    padding: var(--space-lg);
+
     /* Sets the explore panel styles */
     background: var(--color-surface);
     border-left:

@@ -1,6 +1,6 @@
 /*
  * Reset CSS
- * Removes default broswer styles 
+ * Removes default browser styles 
  * and sets a consistent baseline for styling
  */
 
@@ -20,7 +20,7 @@ body {
 }
 
 body {
-    /* Set a default size for body */
+    /* Set a default mininum height for body */
     min-height: 100vh;
 }
 
@@ -32,7 +32,7 @@ p {
 }
 
 a {
-    /* Make links inherit color of their parent and text decoration */
+    /* Make links inherit color of their parent and removes default link underline text decoration */
     color: inherit;
     text-decoration: none;
 }
