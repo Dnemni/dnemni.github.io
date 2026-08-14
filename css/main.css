@@ -494,3 +494,88 @@ h2 {
         min-height: auto;
     }
 }
+
+.progress-modal {
+    /* Sets the styles for the progress modal */
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    display: grid;
+    place-items: center;
+    padding: var(--space-md);
+}
+
+.progress-modal__backdrop {
+    /* Sets the styles for the progress modal backdrop */
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.progress-modal__content {
+    /* Sets the styles for the progress modal content */
+    position: relative;
+    width: min(460px, 100%);
+    padding: var(--space-lg);
+    background: var(--color-surface);
+    border: 1px solid var(--color-accent-muted);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+.progress-modal__content h2 {
+    /* Sets the styles for the progress modal content title */
+    margin: var(--space-sm) 0;
+}
+
+.progress-modal__content a {
+    /* Sets the styles for the progress modal content links */
+    color: var(--color-accent);
+}
+
+.progress-modal__close {
+    /* Sets the styles for the progress modal close button */
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-sm);
+
+    padding: 0;
+    width: 32px;
+    height: 32px;
+
+    background: transparent;
+    border: 0;
+    color: var(--color-text);
+
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.progress-modal__button {
+    /* Sets the styles for the progress modal button */
+    margin-top: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    cursor: pointer;
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-accent);
+    color: var(--color-text);
+}
+
+.progress-modal__close:hover,
+.progress-modal__close:focus-visible {
+    /* Sets the styles for the progress modal close button when hovered or focused */
+    color: var(--color-accent);
+}
+
+.progress-modal__button:hover {
+    /* Sets the styles for the progress modal button when hovered */
+    background: var(--color-surface-raised);
+    border-color: var(--color-accent-muted);
+    transform: translateY(-2px);
+}
+
+.progress-modal__button:focus-visible {
+    /* Shows a clear focus outline for the progress modal button when tab selected */
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+}

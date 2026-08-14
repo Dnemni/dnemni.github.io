@@ -158,6 +158,28 @@
 
 </main>
 
+<div class="progress-modal" id="progress-modal" role="dialog" aria-modal="true" aria-labelledby="progress-title">
+    <div class="progress-modal__backdrop" data-modal-close></div>
+
+    <section class="progress-modal__content">
+        <button class="progress-modal__close" type="button" aria-label="Close notice" data-modal-close>
+            ×
+        </button>
+
+        <p class="panel-kicker">Notice</p>
+        <h2 id="progress-title">Work in progress</h2>
+        <p>
+            This project is currently a work in progress, but feel free to explore.
+            Feedback is always welcome at
+            <a href="mailto:dhruvnemani@gmail.com">dhruvnemani@gmail.com</a>.
+        </p>
+
+        <button class="progress-modal__button" type="button" data-modal-close>
+            Start exploring
+        </button>
+    </section>
+</div>
+
 <!-- Main JS File loaded at the end so it executes after the HTML elements are parsed and loaded -->
 <script src="js/main.js"></script>
 

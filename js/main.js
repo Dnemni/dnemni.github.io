@@ -217,5 +217,22 @@ elements.exploreButtons.forEach((button) => {
     });
 });
 
+const progressModal = document.querySelector("#progress-modal");
+const modalCloseButtons = document.querySelectorAll("[data-modal-close]");
+
+function closeProgressModal() {
+    progressModal.remove();
+}
+
+modalCloseButtons.forEach((button) => {
+    button.addEventListener("click", closeProgressModal);
+});
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && progressModal) {
+        closeProgressModal();
+    }
+});
+
 /* Initial render of the application state to the DOM */
 render();
