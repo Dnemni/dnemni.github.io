@@ -57,6 +57,9 @@ const state = {
     exploredSections: []
 };
 
+/* Define the constant reward for exploring a new section */
+const explorationReward = 25;
+
 /* Reference the browser elements by querying the DOM */
 const elements = {
     /* document represents current webpage and query selects css selectors */
@@ -85,7 +88,10 @@ const elements = {
 
     /* querySelector returns first matching element while querySelectorAll returns all matching elements */
     exploreButtons:
-        document.querySelectorAll("[data-section]")
+        document.querySelectorAll("[data-section]"),
+    
+    stations:
+    document.querySelectorAll("[data-station]")
 };
 
 /* Render the application state to the DOM */
@@ -93,6 +99,7 @@ function render() {
     renderCuriosity();
     renderWorld();
     renderExploreButtons();
+    renderStations();
     renderSystemStatus();
 }
 
@@ -201,6 +208,9 @@ function selectSection(sectionId) {
 
     if (!alreadyExplored) {
         state.exploredSections.push(sectionId);
+
+        /* Increment the curiosity count by the exploration reward when a new section is explored */
+        state.curiosity += explorationReward;
     }
 
     /* Rerender the updated state to the DOM */
@@ -216,6 +226,39 @@ elements.exploreButtons.forEach((button) => {
         selectSection(sectionId);
     });
 });
+
+/* Render the workshop stations to the DOM */
+function renderStations() {
+    elements.stations.forEach((station) => {
+        const sectionId =
+            station.dataset.station;
+
+        /* Check if the station is online (explored) and if it is the active station */
+        const isOnline =
+            state.exploredSections.includes(sectionId);
+        const isActive =
+            state.activeSection === sectionId;
+
+        station.classList.toggle(
+            "is-online",
+            isOnline
+        );
+
+        station.classList.toggle(
+            "is-active",
+            isActive
+        );
+
+        /* Update the station status text content to show whether the station is online or offline */
+        const status =
+            station.querySelector(
+                "[data-station-status]"
+            );
+
+        status.textContent =
+            isOnline ? "Online" : "Offline";
+    });
+}
 
 const progressModal = document.querySelector("#progress-modal");
 const modalCloseButtons = document.querySelectorAll("[data-modal-close]");

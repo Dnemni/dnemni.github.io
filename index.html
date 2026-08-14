@@ -58,6 +58,120 @@
 
         <div class="world-canvas">
 
+            <!-- Workshop Stations start as offline and become online when explored -->
+            <div
+                class="workshop-stations"
+                aria-label="Workshop systems"
+            >
+                <div
+                    class="workshop-station"
+                    data-station="about"
+                >
+                    <span class="station-code">SYS-01</span>
+
+                    <span class="station-name">
+                        Profile Archive
+                    </span>
+
+                    <span
+                        class="station-status"
+                        data-station-status
+                    >
+                        Offline
+                    </span>
+                </div>
+
+                <div
+                    class="workshop-station"
+                    data-station="experience"
+                >
+                    <span class="station-code">SYS-02</span>
+
+                    <span class="station-name">
+                        Field Log
+                    </span>
+
+                    <span
+                        class="station-status"
+                        data-station-status
+                    >
+                        Offline
+                    </span>
+                </div>
+
+                <div
+                    class="workshop-station"
+                    data-station="projects"
+                >
+                    <span class="station-code">SYS-03</span>
+
+                    <span class="station-name">
+                        Project Bay
+                    </span>
+
+                    <span
+                        class="station-status"
+                        data-station-status
+                    >
+                        Offline
+                    </span>
+                </div>
+
+                <div
+                    class="workshop-station"
+                    data-station="side-quests"
+                >
+                    <span class="station-code">SYS-04</span>
+
+                    <span class="station-name">
+                        Recreation Deck
+                    </span>
+
+                    <span
+                        class="station-status"
+                        data-station-status
+                    >
+                        Offline
+                    </span>
+                </div>
+
+                <div
+                    class="workshop-station"
+                    data-station="resume"
+                >
+                    <span class="station-code">SYS-05</span>
+
+                    <span class="station-name">
+                        Personnel File
+                    </span>
+
+                    <span
+                        class="station-status"
+                        data-station-status
+                    >
+                        Offline
+                    </span>
+                </div>
+
+                <div
+                    class="workshop-station"
+                    data-station="contact"
+                >
+                    <span class="station-code">SYS-06</span>
+
+                    <span class="station-name">
+                        Comms Array
+                    </span>
+
+                    <span
+                        class="station-status"
+                        data-station-status
+                    >
+                        Offline
+                    </span>
+                </div>
+            </div>
+
             <!-- Empty state begins as the active view within the world canvas -->
             <div
                 class="world-empty-state"
@@ -158,6 +272,7 @@
 
 </main>
 
+<!--
 <div class="progress-modal" id="progress-modal" role="dialog" aria-modal="true" aria-labelledby="progress-title">
     <div class="progress-modal__backdrop" data-modal-close></div>
 
@@ -179,6 +294,7 @@
         </button>
     </section>
 </div>
+-->
 
 <!-- Main JS File loaded at the end so it executes after the HTML elements are parsed and loaded -->
 <script src="js/main.js"></script>

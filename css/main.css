@@ -126,13 +126,83 @@ h2 {
 
     min-height: 420px;
 
-    display: grid; /* Use grid to center objects within the canvas */
-    place-items: center;
+    display: flex; /* Use flexbox to stack several elements within the canvas */
+    flex-direction: column;
+    gap: var(--space-lg);
+
+    padding: var(--space-lg);
 
     border:
         1px
         solid
         var(--color-border);
+}
+
+.workshop-stations {
+    /* Sets the styles for the workshop stations */
+    display: grid;
+
+    /* Use grid layout to arrange the workshop stations in a 2-column layout */
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: var(--space-sm);
+}
+
+.workshop-station {
+    /* Sets the styles for the workshop station */
+    min-height: 72px;
+
+    display: grid;
+    gap: var(--space-xs);
+
+    padding: var(--space-sm);
+
+    background: var(--color-surface-alt);
+
+    border:
+        var(--border-width)
+        solid
+        var(--color-border);
+
+    transition:
+        background-color 120ms ease,
+        border-color 120ms ease;
+}
+
+.station-code,
+.station-status {
+    /* Sets the styles for the workshop station code and status */
+    font-family: var(--font-mono);
+
+    color: var(--color-text-muted);
+
+    font-size: 0.65rem;
+
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.station-name {
+    /* Sets the styles for the workshop station name */
+    font-family: var(--font-display);
+}
+
+.workshop-station.is-online {
+    /* Sets the styles for the workshop station when online with gray border */
+    background: var(--color-surface);
+
+    border-color: var(--color-status);
+}
+
+.workshop-station.is-online .station-status {
+    /* Sets the styles for the workshop station status when online with green text */
+    color: var(--color-status);
+}
+
+.workshop-station.is-active {
+    /* Sets the styles for the workshop station when active with accent border */
+    border-color: var(--color-accent);
 }
 
 .explore-panel {
@@ -492,6 +562,11 @@ h2 {
     /* When the viewport is less than 600px wide, adjust the portfolio */
     .portfolio {
         min-height: auto;
+    }
+
+    /* When the viewport is less than 600px wide, adjust the workshop stations to be a single column */
+    .workshop-stations {
+        grid-template-columns: 1fr;
     }
 }
 
