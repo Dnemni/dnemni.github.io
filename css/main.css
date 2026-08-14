@@ -376,6 +376,58 @@ h2 {
     color: var(--color-accent);
 }
 
+.reset-progress {
+    /* Sets the styles for the reset progress button */
+    display: block;
+
+    margin:
+        calc(var(--space-md) * -1)
+        auto
+        var(--space-xl);
+
+    padding:
+        var(--space-xs)
+        var(--space-sm);
+
+    background: transparent;
+
+    border:
+        var(--border-width)
+        solid
+        var(--color-border);
+
+    color:
+        var(--color-text-muted);
+
+    font-family:
+        var(--font-mono);
+
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    cursor: pointer;
+}
+
+.reset-progress:hover {
+    /* Sets the styles for the reset progress button when hovered */
+    color:
+        var(--color-text);
+
+    border-color:
+        var(--color-accent-muted);
+}
+
+.reset-progress:focus-visible {
+    /* Sets the styles for the reset progress button when focused */
+    outline:
+        2px
+        solid
+        var(--color-accent);
+
+    outline-offset: 3px;
+}
+
 .current-status {
     /* Sets the styles for the current status indicator */
     display: flex;

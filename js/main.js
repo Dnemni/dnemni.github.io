@@ -60,6 +60,83 @@ const state = {
 /* Define the constant reward for exploring a new section */
 const explorationReward = 25;
 
+/* Define the key used for storing progress in localStorage */
+const STORAGE_KEY = "dhruv-workshop-progress-v1";
+
+/* Load progress from localStorage if it exists */
+function saveProgress() {
+    /* Create a progress object containing the current curiosity and explored sections only from the state */
+    const progress = {
+        curiosity:
+            state.curiosity,
+
+        exploredSections:
+            state.exploredSections
+    };
+
+    /* Save the serialized progress (JSON text representation of the progress object) to localStorage */
+    const serializedProgress =
+        JSON.stringify(progress);
+
+    localStorage.setItem(
+        STORAGE_KEY,
+        serializedProgress
+    );
+}
+
+/* Load progress from localStorage if it exists */
+function loadProgress() {
+    /* Retrieve the saved progress from localStorage via the STORAGE_KEY */
+    const savedProgress =
+        localStorage.getItem(
+            STORAGE_KEY
+        );
+
+    /* If there is no saved progress, do nothing */
+    if (savedProgress === null) {
+        return;
+    }
+
+    /* Attempt to parse and load the saved progress */
+    try {
+        const parsedProgress =
+            JSON.parse(savedProgress);
+
+        /* Validate and load the curiosity value from the parsed progress */
+        if (
+            typeof parsedProgress.curiosity
+            === "number"
+        ) {
+            state.curiosity =
+                parsedProgress.curiosity;
+        }
+
+        /* Validate and load the explored sections array from the parsed progress */
+        if (
+            Array.isArray(
+                parsedProgress.exploredSections
+            )
+        ) {
+            state.exploredSections =
+                parsedProgress.exploredSections.filter(
+                    (sectionId) =>
+                        sectionContent[sectionId]
+                        !== undefined
+                );
+        }
+    } catch (error) {
+        /* If an error occurs while parsing or loading, log a warning and remove the corrupted progress */
+        console.warn(
+            "Saved Workshop progress could not be loaded.",
+            error
+        );
+
+        localStorage.removeItem(
+            STORAGE_KEY
+        );
+    }
+}
+
 /* Reference the browser elements by querying the DOM */
 const elements = {
     /* document represents current webpage and query selects css selectors */
@@ -85,6 +162,9 @@ const elements = {
 
     detailBody:
         document.querySelector("[data-detail-body]"),
+
+    resetProgress:
+        document.querySelector("[data-reset-progress]"),
 
     /* querySelector returns first matching element while querySelectorAll returns all matching elements */
     exploreButtons:
@@ -189,6 +269,9 @@ function renderSystemStatus() {
 function handleCoreClick() {
     state.curiosity += 1;
 
+    /* Save the updated progress to localStorage */
+    saveProgress();
+
     /* Rerender the updated state to the DOM */
     render();
 }
@@ -211,6 +294,9 @@ function selectSection(sectionId) {
 
         /* Increment the curiosity count by the exploration reward when a new section is explored */
         state.curiosity += explorationReward;
+
+        /* Save the updated progress to localStorage */
+        saveProgress();
     }
 
     /* Rerender the updated state to the DOM */
@@ -260,6 +346,28 @@ function renderStations() {
     });
 }
 
+/* Reset the workshop progress to empty state and clear localStorage */
+function resetProgress() {
+    /* Reset the runtime reality */
+    state.curiosity = 0;
+    state.activeSection = null;
+    state.exploredSections = [];
+
+    /* Remove the saved progress from localStorage */
+    localStorage.removeItem(
+        STORAGE_KEY
+    );
+
+    /* Rerender the application state to the DOM after resetting progress */
+    render();
+}
+
+/* Handle a click on the reset progress button to clear the saved progress and reload the page */
+elements.resetProgress.addEventListener(
+    "click",
+    resetProgress
+);
+
 const progressModal = document.querySelector("#progress-modal");
 const modalCloseButtons = document.querySelectorAll("[data-modal-close]");
 
@@ -276,6 +384,9 @@ document.addEventListener("keydown", (event) => {
         closeProgressModal();
     }
 });
+
+/* Load the saved progress from localStorage when the application starts */
+loadProgress();
 
 /* Initial render of the application state to the DOM */
 render();
