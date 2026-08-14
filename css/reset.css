@@ -36,3 +36,14 @@ a {
     color: inherit;
     text-decoration: none;
 }
+
+button {
+    /* Make buttons inherit font and color from their parent */
+    font: inherit;
+    color: inherit;
+}
+
+[hidden] {
+    /* Ensure predictable hiding behavior across browsers */
+    display: none !important;
+}

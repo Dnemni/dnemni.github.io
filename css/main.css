@@ -122,7 +122,7 @@ h2 {
 
 .world-canvas {
     /* Sets the styles for the world canvas */
-    flex: 1;
+    flex: 1; /* Tells canvas to be the flexible item while header is fixed */
 
     min-height: 420px;
 
@@ -161,6 +161,12 @@ h2 {
 
     background: var(--color-surface-alt);
 
+    width: 100%;
+
+    text-align: left;
+
+    cursor: pointer;
+
     border:
         var(--border-width)
         solid
@@ -173,6 +179,17 @@ h2 {
         transform 120ms ease;
 }
 
+.explore-link.is-active {
+    /* Sets the styles for the explore link when active */
+    background: var(--color-surface-raised);
+    border-color: var(--color-accent);
+}
+
+.explore-link.is-explored .explore-number {
+    /* Sets the styles for the explore link when explored */
+    color: var(--color-status);
+}
+
 .explore-link:hover {
     /* When the link is hovered, change its appearance to these declarations */
     background: var(--color-surface-raised);
@@ -182,7 +199,7 @@ h2 {
 }
 
 .explore-link:focus-visible {
-    /* Allows the link to be focused using tab and adds a focus outline */
+    /* Shows a clear focus outline for the explore links when tab selected */
     outline:
         2px
         solid
@@ -199,7 +216,7 @@ h2 {
 }
 
 .workshop-core {
-    /* Creates the fake centerpiece circle named CORE */
+    /* Creates the centerpiece circle button named CORE */
     width: min(180px, 80%); /* Use which ever is smaller: 180px or 80% of the container */
     aspect-ratio: 1;
 
@@ -225,6 +242,37 @@ h2 {
     box-shadow:
         0 0 0 8px var(--color-surface),
         0 0 0 9px var(--color-border);
+    
+    cursor: pointer;
+
+    transition:
+        transform 100ms ease,
+        border-color 100ms ease;
+}
+
+/* 
+ * Combination of hover and activate states gives illusion of button clicking down and up
+ */
+
+.workshop-core:hover {
+    /* When the core is hovered, change its appearance to these declarations */
+    border-color: var(--color-accent);
+    transform: scale(1.03);
+}
+
+.workshop-core:active {
+    /* When the core is clicked, change its appearance to these declarations */
+    transform: scale(0.97);
+}
+
+.workshop-core:focus-visible {
+    /* Shows a clear focus outline for the core button when tab selected */
+    outline:
+        2px
+        solid
+        var(--color-accent);
+
+    outline-offset: 4px;
 }
 
 .workshop-core span {
@@ -235,6 +283,26 @@ h2 {
     letter-spacing: 0.16em;
     text-transform: uppercase;
 
+    color: var(--color-accent);
+}
+
+.curiosity-readout {
+    /* Sets the styles for the curiosity readout */
+    margin-top: calc(var(--space-sm) * -1);
+    margin-bottom: var(--space-xl);
+
+    color: var(--color-text-muted);
+
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+
+    letter-spacing: 0.08em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#curiosity-count {
+    /* Sets the styles for the variable curiosity count */
     color: var(--color-accent);
 }
 
@@ -324,7 +392,7 @@ h2 {
 }
 
 /*
- * Following 2 sections set up the empty state for the world and titles
+ * Following 2 sections set up the world's empty state and empty state titles
  */
 
  .world-empty-state {
@@ -350,6 +418,39 @@ h2 {
 
     letter-spacing: 0.12em;
     text-transform: uppercase;
+}
+
+/*
+ * Following 3 sections set up the world's detail state, detail state titles, and detail state highlights
+ */
+
+ .world-detail {
+    /* Sets the styles for the world's detail state */
+    width: min(520px, 90%);
+
+    padding: var(--space-lg);
+
+    background: var(--color-surface);
+
+    border:
+        var(--border-width)
+        solid
+        var(--color-border);
+}
+
+.world-detail h3 {
+    /* Sets the styles for the world's detail state title */
+    margin-bottom: var(--space-sm);
+
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+}
+
+.world-detail-copy {
+    /* Sets the styles for the world's detail state copy */
+    color: var(--color-text-muted);
+
+    line-height: 1.7;
 }
 
 @media (max-width: 960px) { /* 960px to give breathing room before layout stops looking good */
@@ -388,6 +489,7 @@ h2 {
         padding-bottom: var(--space-sm);
     }
 
+    /* When the viewport is less than 600px wide, adjust the portfolio */
     .portfolio {
         min-height: auto;
     }

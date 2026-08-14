@@ -25,9 +25,20 @@
             <p class="identity-role">Software Engineer · AI · Systems</p>
         </div>
 
-        <div class="workshop-core">
+        <!-- Turning core into an interactive button element -->
+        <button
+            class="workshop-core"
+            type="button"
+            aria-label="Generate curiosity"
+        >
             <span>Core</span>
-        </div>
+        </button>
+
+        <!-- Use id instead of class to answer which unique element this is -->
+        <p class="curiosity-readout">
+            <span id="curiosity-count">0</span>
+            curiosity
+        </p>
 
         <div class="current-status">
             <span class="status-indicator" aria-hidden="true"></span>
@@ -46,10 +57,40 @@
         </div>
 
         <div class="world-canvas">
-            <div class="world-empty-state">
-                <p class="empty-state-title">Workshop offline</p>
-                <p>Systems will appear here as you explore.</p>
+
+            <!-- Empty state begins as the active view within the world canvas -->
+            <div
+                class="world-empty-state"
+                data-world-empty
+            >
+                <p class="empty-state-title">
+                    Workshop offline
+                </p>
+
+                <p>
+                    Systems will appear here as you explore.
+                </p>
             </div>
+
+            <!-- Article with hidden attribute means world detail begins as not relevant/visible -->
+            <article
+                class="world-detail"
+                data-world-detail
+                hidden
+            >
+                <p
+                    class="panel-kicker"
+                    data-detail-kicker
+                ></p>
+
+                <h3 data-detail-title></h3>
+
+                <p
+                    class="world-detail-copy"
+                    data-detail-body
+                ></p>
+            </article>
+
         </div>
     </section>
 
@@ -59,39 +100,65 @@
             <h2>Explore</h2>
         </div>
 
-        <a class="explore-link" href="#about">
+        <!-- Data section is metadata that javascript can ask for through button.dataset.section -->
+        <button
+            class="explore-link"
+            type="button"
+            data-section="about" 
+        >
             <span class="explore-number">01</span>
             <span>About</span>
-        </a>
+        </button>
 
-        <a class="explore-link" href="#experience">
+        <button
+            class="explore-link"
+            type="button"
+            data-section="experience"
+        >
             <span class="explore-number">02</span>
             <span>Experience</span>
-        </a>
+        </button>
 
-        <a class="explore-link" href="#projects">
+        <button
+            class="explore-link"
+            type="button"
+            data-section="projects"
+        >
             <span class="explore-number">03</span>
             <span>Projects</span>
-        </a>
+        </button>
 
-        <a class="explore-link" href="#side-quests">
+        <button
+            class="explore-link"
+            type="button"
+            data-section="side-quests"
+        >
             <span class="explore-number">04</span>
             <span>Side Quests</span>
-        </a>
+        </button>
 
-        <a class="explore-link" href="#resume">
+        <button
+            class="explore-link"
+            type="button"
+            data-section="resume"
+        >
             <span class="explore-number">05</span>
             <span>Resume</span>
-        </a>
+        </button>
 
-        <a class="explore-link" href="#contact">
+        <button
+            class="explore-link"
+            type="button"
+            data-section="contact"
+        >
             <span class="explore-number">06</span>
             <span>Contact</span>
-        </a>
+        </button>
     </nav>
 
 </main>
 
+<!-- Main JS File loaded at the end so it executes after the HTML elements are parsed and loaded -->
 <script src="js/main.js"></script>
 
 </body>
