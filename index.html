@@ -71,8 +71,9 @@
                 class="workshop-stations"
                 aria-label="Workshop systems"
             >
-                <div
+                <button
                     class="workshop-station"
+                    type="button"
                     data-station="about"
                 >
                     <span class="station-code">SYS-01</span>
@@ -87,10 +88,11 @@
                     >
                         Offline
                     </span>
-                </div>
+                </button>
 
-                <div
+                <button
                     class="workshop-station"
+                    type="button"
                     data-station="experience"
                 >
                     <span class="station-code">SYS-02</span>
@@ -105,10 +107,11 @@
                     >
                         Offline
                     </span>
-                </div>
+                </button>
 
-                <div
+                <button
                     class="workshop-station"
+                    type="button"
                     data-station="projects"
                 >
                     <span class="station-code">SYS-03</span>
@@ -123,10 +126,11 @@
                     >
                         Offline
                     </span>
-                </div>
+                </button>
 
-                <div
+                <button
                     class="workshop-station"
+                    type="button"
                     data-station="side-quests"
                 >
                     <span class="station-code">SYS-04</span>
@@ -141,10 +145,11 @@
                     >
                         Offline
                     </span>
-                </div>
+                </button>
 
-                <div
+                <button
                     class="workshop-station"
+                    type="button"
                     data-station="resume"
                 >
                     <span class="station-code">SYS-05</span>
@@ -159,10 +164,11 @@
                     >
                         Offline
                     </span>
-                </div>
+                </button>
 
-                <div
+                <button
                     class="workshop-station"
+                    type="button"
                     data-station="contact"
                 >
                     <span class="station-code">SYS-06</span>
@@ -177,7 +183,7 @@
                     >
                         Offline
                     </span>
-                </div>
+                </button>
             </div>
 
             <!-- Empty state begins as the active view within the world canvas -->
@@ -209,8 +215,18 @@
 
                 <p
                     class="world-detail-copy"
-                    data-detail-body
+                    data-detail-intro
                 ></p>
+
+                <div
+                    class="detail-items"
+                    data-detail-items
+                ></div>
+
+                <div
+                    class="detail-actions"
+                    data-detail-actions
+                ></div>
             </article>
 
         </div>
@@ -280,7 +296,7 @@
 
 </main>
 
-
+<!--
 <div class="progress-modal" id="progress-modal" role="dialog" aria-modal="true" aria-labelledby="progress-title">
     <div class="progress-modal__backdrop" data-modal-close></div>
 
@@ -302,7 +318,7 @@
         </button>
     </section>
 </div>
-
+-->
 
 <!-- Main JS File loaded at the end so it executes after the HTML elements are parsed and loaded -->
 <script src="js/main.js"></script>

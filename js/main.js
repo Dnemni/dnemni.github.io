@@ -10,44 +10,224 @@ const sectionContent = {
     about: {
         kicker: "Profile",
         title: "About",
-        body:
-            "I'm a Computer Science and Artificial Intelligence student at Purdue interested in software engineering, AI, systems, and building products."
+        intro:
+            "I'm a Computer Science and Artificial Intelligence student at Purdue who likes building software where ambitious engineering meets real human problems.",
+
+        items: [
+            {
+                eyebrow: "Focus",
+                title: "Software · AI · Systems",
+                meta: "Purdue University",
+                description:
+                    "My interests span software engineering, machine learning, systems, information retrieval, and human-centered applications of AI."
+            },
+
+            {
+                eyebrow: "Current",
+                title: "Building and learning",
+                meta: "2026",
+                description:
+                    "I'm currently continuing my work at Johns Hopkins APL, building CravingChef, developing a RISC-V virtual machine from first principles, and exploring machine learning and robotics."
+            }
+        ],
+
+        actions: []
     },
 
     experience: {
         kicker: "Field Work",
         title: "Experience",
-        body:
-            "My experience spans human-machine engineering at Johns Hopkins APL, platform engineering for CravingChef, and software engineering work at Software Developers Inc."
+        intro:
+            "I've worked across applied AI, search and information retrieval, platform engineering, and product development.",
+
+        items: [
+            {
+                eyebrow:
+                    "Johns Hopkins Applied Physics Laboratory",
+
+                title:
+                    "Software Engineering Intern",
+
+                meta:
+                    "May 2026 – Present",
+
+                description:
+                    "Human-machine engineering work spanning an MCP-based AI information-retrieval system, offline document search, citation-backed ticket automation, testing, and geospatial tooling."
+            },
+
+            {
+                eyebrow:
+                    "CravingChef",
+
+                title:
+                    "Co-Founder & Platform Lead Engineer",
+
+                meta:
+                    "Nov. 2025 – Present",
+
+                description:
+                    "Leading backend and platform development for a mobile recipe product, including APIs, content ingestion, analytics, AI recommendations, Redis caching, and Firestore-backed workflows."
+            },
+
+            {
+                eyebrow:
+                    "Software Developers Inc.",
+
+                title:
+                    "Software Engineering Intern",
+
+                meta:
+                    "May 2025 – Aug. 2025",
+
+                description:
+                    "Built proof-of-concept agentic AI workflows and tools that transformed interface mockups into working database-backed applications."
+            }
+        ],
+
+        actions: []
     },
 
     projects: {
         kicker: "Project Systems",
         title: "Projects",
-        body:
-            "Current and previous projects include a RISC-V virtual machine, Applihero, and CourseMate, alongside whatever side project has distracted me this week."
+        intro:
+            "I learn best by building things that are slightly more ambitious than I initially know how to build.",
+
+        items: [
+            {
+                eyebrow:
+                    "Systems",
+
+                title:
+                    "RISC-V Virtual Machine",
+
+                meta:
+                    "C17 · RV32I · Linux/Unix",
+
+                description:
+                    "A learn-while-building systems project progressing from first principles toward RV32I execution and, eventually, Linux boot."
+            },
+
+            {
+                eyebrow:
+                    "AI Career Tools",
+
+                title:
+                    "Applihero",
+
+                meta:
+                    "Next.js · TypeScript · PostgreSQL · RAG",
+
+                description:
+                    "A full-stack career-coaching application using persistent data, vector embeddings, semantic retrieval, and human-in-the-loop review."
+            },
+
+            {
+                eyebrow:
+                    "Education",
+
+                title:
+                    "CourseMate",
+
+                meta:
+                    "Next.js · PostgreSQL · AWS",
+
+                description:
+                    "A course-management proof of concept combining planning, progress tracking, calendar workflows, and RAG-based micro-learning."
+            }
+        ],
+
+        actions: []
     },
 
     "side-quests": {
         kicker: "Side Quests",
         title: "Outside the Terminal",
-        body:
-            "Outside software, I lead the Purdue Squash Club and spend time playing squash, climbing, running, and finding new things to get unnecessarily competitive about."
+        intro:
+            "A suspicious amount of my free time also involves trying to get better at activities that are difficult to get good at.",
+
+        items: [
+            {
+                eyebrow:
+                    "Leadership",
+
+                title:
+                    "Purdue Squash Club",
+
+                meta:
+                    "President & Founding Member",
+
+                description:
+                    "I helped build the club to more than 100 members and captain our competitive team at CSA Club Team Nationals."
+            },
+
+            {
+                eyebrow:
+                    "Currently grinding",
+
+                title:
+                    "Squash · Climbing · Running",
+
+                meta:
+                    "Usually unnecessarily competitive",
+
+                description:
+                    "When I'm away from a computer, there's a good chance I'm on a squash court, climbing wall, or trying to convince myself a run was a good idea."
+            }
+        ],
+
+        actions: []
     },
 
     resume: {
         kicker: "Personnel File",
         title: "Resume",
-        body:
-            "A concise record of my experience, projects, education, leadership, and technical work."
+        intro:
+            "The compact version of the Workshop: experience, projects, education, leadership, and technical skills in one page.",
+
+        items: [],
+
+        actions: [
+            {
+                label: "View resume (Last updated August 16, 2026)",
+                href:
+                    "assets/Dhruv_Nemani_Resume_Fall_2026.pdf",
+                external: true
+            }
+        ]
     },
 
     contact: {
         kicker: "Communications",
         title: "Contact",
-        body:
-            "Want to talk about software, AI, systems, startups, research, squash, football (both kinds), or something completely unrelated? This will become the fastest way to reach me."
-    }
+        intro:
+            "Want to talk about software, AI, systems, startups, research, squash, football (both kinds), or something completely unrelated? This will become the fastest way to reach me.",
+
+        items: [],
+
+        actions: [
+            {
+                label: "Email me",
+                href:
+                    "mailto:dhruvnemani@gmail.com",
+                external: false
+            },
+
+            {
+                label: "LinkedIn",
+                href:
+                    "https://linkedin.com/in/dhruv-nemani",
+                external: true
+            },
+
+            {
+                label: "GitHub",
+                href:
+                    "https://github.com/Dnemni",
+                external: true
+            }
+        ]
+    },
 };
 
 /* Define application state */
@@ -63,7 +243,7 @@ const explorationReward = 25;
 /* Define the key used for storing progress in localStorage */
 const STORAGE_KEY = "dhruv-workshop-progress-v1";
 
-/* Load progress from localStorage if it exists */
+/* Save persistent Workshop progress to localStorage */
 function saveProgress() {
     /* Create a progress object containing the current curiosity and explored sections only from the state */
     const progress = {
@@ -160,8 +340,14 @@ const elements = {
     detailTitle:
         document.querySelector("[data-detail-title]"),
 
-    detailBody:
-        document.querySelector("[data-detail-body]"),
+    detailIntro:
+        document.querySelector("[data-detail-intro]"),
+
+    detailItems:
+        document.querySelector("[data-detail-items]"),
+
+    detailActions:
+        document.querySelector("[data-detail-actions]"),
 
     resetProgress:
         document.querySelector("[data-reset-progress]"),
@@ -213,8 +399,18 @@ function renderWorld() {
     elements.detailTitle.textContent =
         content.title;
 
-    elements.detailBody.textContent =
-        content.body;
+    elements.detailIntro.textContent =
+        content.intro;
+
+    /* Render the detail items for the active section */
+    renderDetailItems(
+        content.items
+    );
+
+    /* Render the detail actions for the active section */
+    renderDetailActions(
+        content.actions
+    );
 }
 
 /* Render the explore buttons to the DOM */
@@ -313,6 +509,23 @@ elements.exploreButtons.forEach((button) => {
     });
 });
 
+/* Add click event listeners to each station element to select the corresponding section when clicked */
+elements.stations.forEach(
+    (station) => {
+        station.addEventListener(
+            "click",
+            () => {
+                const sectionId =
+                    station.dataset.station;
+
+                selectSection(
+                    sectionId
+                );
+            }
+        );
+    }
+);
+
 /* Render the workshop stations to the DOM */
 function renderStations() {
     elements.stations.forEach((station) => {
@@ -346,6 +559,109 @@ function renderStations() {
     });
 }
 
+/* Render the detail items for the active section to the DOM */
+function renderDetailItems(items) {
+    /* Clear the existing detail items before rendering new ones */
+    elements.detailItems.replaceChildren();
+
+    /* Start with empty container and populate it for each item */
+    items.forEach((item) => {
+        const itemElement =
+            document.createElement("section");
+
+        itemElement.classList.add(
+            "detail-item"
+        );
+
+        /* Create and populate the eyebrow element for the item */
+        const eyebrow =
+            document.createElement("p");
+
+        eyebrow.classList.add(
+            "detail-item-eyebrow"
+        );
+
+        eyebrow.textContent =
+            item.eyebrow;
+
+        /* Create and populate the heading element for the item */
+        const title =
+            document.createElement("h4");
+        
+        title.textContent =
+            item.title;
+
+        /* Create and populate the meta element for the item */
+        const meta =
+            document.createElement("p");
+
+        meta.classList.add(
+            "detail-item-meta"
+        );
+
+        meta.textContent =
+            item.meta;
+
+        /* Create and populate the description element for the item */
+        const description =
+            document.createElement("p");
+
+        description.classList.add(
+            "detail-item-description"
+        );
+
+        description.textContent =
+            item.description;
+
+        /* Append children to the corresponding section */
+        itemElement.append(
+            eyebrow,
+            title,
+            meta,
+            description
+        );
+
+        /* Append the populated item element to the detail items container */
+        elements.detailItems.append(
+            itemElement
+        );
+    });
+}
+
+/* Render the detail actions for the active section to the DOM */
+function renderDetailActions(actions) {
+    /* Clear the existing detail actions before rendering new ones */
+    elements.detailActions.replaceChildren();
+
+    actions.forEach((action) => {
+        /* Create a link element for each action */
+        const link =
+            document.createElement("a");
+
+        link.classList.add(
+            "detail-action"
+        );
+
+        /* Set the text content of the link to the action's label */
+        link.textContent =
+            action.label;
+
+        /* Set the href attribute of the link to the action's href */
+        link.href =
+            action.href;
+
+        if (action.external) {
+            link.target = "_blank"; // Open external links in a new tab
+            link.rel =
+                "noopener noreferrer"; // Security best practice for external links
+        }
+
+        elements.detailActions.append(
+            link
+        );
+    });
+}
+
 /* Reset the workshop progress to empty state and clear localStorage */
 function resetProgress() {
     /* Reset the runtime reality */
@@ -362,7 +678,7 @@ function resetProgress() {
     render();
 }
 
-/* Handle a click on the reset progress button to clear the saved progress and reload the page */
+/* Handle a click on the reset progress button to clear and rerender Workshop progress */
 elements.resetProgress.addEventListener(
     "click",
     resetProgress
