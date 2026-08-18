@@ -201,7 +201,7 @@ const sectionContent = {
         kicker: "Communications",
         title: "Contact",
         intro:
-            "Want to talk about software, AI, systems, startups, research, squash, football (both kinds), or something completely unrelated? This will become the fastest way to reach me.",
+            "Want to talk about software, AI, systems, startups, research, squash, football (both kinds), or something completely unrelated? Feel free to reach out via email or LinkedIn, or check out my GitHub for some of my work.",
 
         items: [],
 
@@ -239,6 +239,161 @@ const state = {
 
 /* Define the constant reward for exploring a new section */
 const explorationReward = 25;
+
+/* Define the milestones for the Workshop based on exploration and curiosity thresholds */
+const milestoneDefinitions = [
+    {
+        id: "first-signal",
+
+        label:
+            "First Signal",
+
+        description:
+            "Explore your first Workshop system.",
+
+        /* Define function to check if the milestone is unlocked based on the number of explored sections */
+        isUnlocked:
+            (currentState) =>
+                currentState
+                    .exploredSections
+                    .length >= 1
+    },
+
+    {
+        id: "network-forming",
+
+        label:
+            "Network Forming",
+
+        description:
+            "Explore three Workshop systems.",
+
+        isUnlocked:
+            (currentState) =>
+                currentState
+                    .exploredSections
+                    .length >= 3
+    },
+
+    {
+        id: "full-survey",
+
+        label:
+            "Full Survey",
+
+        description:
+            "Explore every Workshop system.",
+
+        isUnlocked:
+            (currentState) =>
+                currentState
+                    .exploredSections
+                    .length >= 6
+    },
+
+    {
+        id: "power-reserve",
+
+        label:
+            "Power Reserve",
+
+        description:
+            "Reach 100 curiosity.",
+
+        isUnlocked:
+            (currentState) =>
+                currentState
+                    .curiosity >= 100
+    },
+
+    {
+        id: "overclocked",
+
+        label:
+            "Overclocked",
+
+        description:
+            "Reach 250 curiosity.",
+
+        isUnlocked:
+            (currentState) =>
+                currentState
+                    .curiosity >= 250
+    }
+];
+
+/* Define the workshop stages based on curiosity thresholds */
+const workshopStages = [
+    {
+        id: "standby",
+        label: "Standby",
+        minCuriosity: 0
+    },
+
+    {
+        id: "signal",
+        label: "Signal Acquired",
+        minCuriosity: 25
+    },
+
+    {
+        id: "warming",
+        label: "Systems Warming",
+        minCuriosity: 75
+    },
+
+    {
+        id: "online",
+        label: "Workshop Online",
+        minCuriosity: 150
+    },
+
+    {
+        id: "overclocked",
+        label: "Overclocked",
+        minCuriosity: 250
+    }
+];
+
+/* Get the current workshop stage based on the curiosity value */
+function getWorkshopStage() {
+    let currentStage =
+        workshopStages[0];
+
+    /* Iterate through the workshop stages and update the current stage based on the curiosity value */
+    workshopStages.forEach((stage) => {
+        if (
+            state.curiosity
+            >= stage.minCuriosity
+        ) {
+            currentStage = stage;
+        }
+    });
+
+    return currentStage;
+}
+
+/* Get the next workshop stage based on the current stage */
+function getNextWorkshopStage(currentStage) {
+    const currentIndex = workshopStages.indexOf(currentStage);
+
+    return (workshopStages[currentIndex + 1] ?? null);
+}
+
+/* Get the progress percentage between the current and next workshop stages based on the curiosity value */
+function getWorkshopStageProgress(currentStage, nextStage) {
+    if (nextStage === null) {
+        return 100;
+    }
+
+    const stageRange = nextStage.minCuriosity - currentStage.minCuriosity;
+
+    const stageProgress = state.curiosity - currentStage.minCuriosity;
+
+    const percentage = (stageProgress / stageRange) * 100;
+
+    return Math.min(100, Math.max(0, percentage));
+}
 
 /* Define the key used for storing progress in localStorage */
 const STORAGE_KEY = "dhruv-workshop-progress-v1";
@@ -284,8 +439,8 @@ function loadProgress() {
 
         /* Validate and load the curiosity value from the parsed progress */
         if (
-            typeof parsedProgress.curiosity
-            === "number"
+            Number.isFinite(parsedProgress.curiosity)
+            && parsedProgress.curiosity >= 0
         ) {
             state.curiosity =
                 parsedProgress.curiosity;
@@ -352,6 +507,21 @@ const elements = {
     resetProgress:
         document.querySelector("[data-reset-progress]"),
 
+    workshopStageLabel:
+        document.querySelector("[data-workshop-stage-label]"),
+
+    workshopMeter:
+        document.querySelector("[data-workshop-meter]"),
+
+    workshopNext:
+        document.querySelector("[data-workshop-next]"),
+
+    milestoneList:
+        document.querySelector("[data-milestone-list]"),
+
+    milestoneCount:
+        document.querySelector("[data-milestone-count]"),
+
     /* querySelector returns first matching element while querySelectorAll returns all matching elements */
     exploreButtons:
         document.querySelectorAll("[data-section]"),
@@ -363,10 +533,12 @@ const elements = {
 /* Render the application state to the DOM */
 function render() {
     renderCuriosity();
+    renderWorkshopProgression();
     renderWorld();
     renderExploreButtons();
     renderStations();
     renderSystemStatus();
+    renderMilestones();
 }
 
 /* Render the curiosity count to the DOM */
@@ -660,6 +832,138 @@ function renderDetailActions(actions) {
             link
         );
     });
+}
+
+/* Render the workshop progression to the DOM */
+function renderWorkshopProgression() {
+    const currentStage = getWorkshopStage();
+
+    const nextStage =
+        getNextWorkshopStage(
+            currentStage
+        );
+
+    const progress =
+        getWorkshopStageProgress(
+            currentStage,
+            nextStage
+        );
+
+    elements.workshopStageLabel
+        .textContent =
+            currentStage.label;
+
+    elements.workshopMeter.value =
+        progress;
+
+    document.body.dataset.workshopStage =
+        currentStage.id;
+
+    if (nextStage === null) {
+        elements.workshopNext.textContent =
+            "Maximum stable output reached.";
+
+        return;
+    }
+
+    const curiosityRemaining =
+        nextStage.minCuriosity
+        - state.curiosity;
+
+    elements.workshopNext.textContent =
+        `${curiosityRemaining} curiosity to ${nextStage.label}`;
+}
+
+/* Render the milestones to the DOM */
+function renderMilestones() {
+    /* Clear the existing milestone list before rendering new milestones */
+    elements.milestoneList.replaceChildren();
+
+    let unlockedCount = 0;
+
+    /* Iterate through each milestone definition and render its status based on the current application state */
+    milestoneDefinitions.forEach(
+        (milestone) => {
+
+            const isUnlocked =
+                milestone.isUnlocked(
+                    state
+                );
+
+            if (isUnlocked) {
+                unlockedCount += 1;
+            }
+
+            const milestoneElement =
+                document.createElement(
+                    "div"
+                );
+
+            milestoneElement
+                .classList
+                .add("milestone");
+
+            milestoneElement
+                .classList
+                .toggle(
+                    "is-unlocked",
+                    isUnlocked
+                );
+
+            const label =
+                document.createElement(
+                    "p"
+                );
+
+            label.classList.add(
+                "milestone-label"
+            );
+
+            label.textContent =
+                milestone.label;
+
+            const description =
+                document.createElement(
+                    "p"
+                );
+
+            description.classList.add(
+                "milestone-description"
+            );
+
+            description.textContent =
+                milestone.description;
+
+            const status =
+                document.createElement(
+                    "span"
+                );
+
+            status.classList.add(
+                "milestone-status"
+            );
+
+            status.textContent =
+                isUnlocked
+                    ? "Unlocked"
+                    : "Locked";
+
+            milestoneElement.append(
+                label,
+                description,
+                status
+            );
+
+            elements.milestoneList
+                .append(
+                    milestoneElement
+                );
+        }
+    );
+
+    /* Update the milestone count text content to show the number of unlocked milestones out of the total milestones */
+    elements.milestoneCount.textContent =
+        `${unlockedCount}/${milestoneDefinitions.length}`;
 }
 
 /* Reset the workshop progress to empty state and clear localStorage */

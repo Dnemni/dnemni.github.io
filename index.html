@@ -48,6 +48,42 @@
             Reset workshop
         </button>
 
+        <section
+            class="workshop-progression"
+            aria-labelledby="workshop-power-label"
+        >
+            <div class="progression-heading">
+                <p
+                    class="status-label"
+                    id="workshop-power-label"
+                >
+                    Power state
+                </p>
+
+                <p
+                    class="progression-stage"
+                    data-workshop-stage-label
+                >
+                    Standby
+                </p>
+            </div>
+
+            <progress
+                class="progression-meter"
+                data-workshop-meter
+                max="100"
+                value="0"
+                aria-label="Progress toward the next Workshop power state"
+            ></progress>
+
+            <p
+                class="progression-next"
+                data-workshop-next
+            >
+                25 curiosity to Signal Acquired
+            </p>
+        </section>
+
         <div class="current-status">
             <span class="status-indicator" aria-hidden="true"></span>
 
@@ -56,6 +92,34 @@
                 <p>Purdue CS + AI</p>
             </div>
         </div>
+
+        <section
+            class="workshop-milestones"
+            aria-labelledby="milestone-heading"
+        >
+            <div class="milestone-heading">
+
+                <p
+                    class="status-label"
+                    id="milestone-heading"
+                >
+                    Milestones
+                </p>
+
+                <p
+                    class="milestone-count"
+                    data-milestone-count
+                >
+                    0/5
+                </p>
+
+            </div>
+
+            <div
+                class="milestone-list"
+                data-milestone-list
+            ></div>
+        </section>
     </section>
 
     <section class="world-panel">
